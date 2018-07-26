@@ -278,13 +278,12 @@ namespace FinanceAPI.Controllers
         /// <param name="budgetName">Name of Budget</param>
         /// <param name="budgetDescription">Description</param>
         /// <param name="spendingTarget">Spending Target</param>
-        /// <param name="currentBalance">Current Balance</param>
         /// <returns>Integer indicating if Insert was successful</returns>
         [Route("AddBudget")]
-        [AcceptVerbs("GET")]
-        public int AddBudget(int householdId, string budgetName, string budgetDescription, decimal spendingTarget, decimal currentBalance)
+        [AcceptVerbs("POST")]
+        public int AddBudget(int householdId, string budgetName, string budgetDescription, decimal spendingTarget)
         {
-            return db.AddBudget(householdId, budgetName, budgetDescription, spendingTarget, currentBalance);
+            return db.AddBudget(householdId, budgetName, budgetDescription, spendingTarget);
         }
 
         /// <summary>
@@ -295,13 +294,12 @@ namespace FinanceAPI.Controllers
         /// <param name="name">Account Name</param>
         /// <param name="description">Description</param>
         /// <param name="startingBalance">Starting Balance</param>
-        /// <param name="currentBalance">Current Balance</param>
         /// <returns>Integer indicating if Insert was successful</returns>
         [Route("AddAccount")]
-        [AcceptVerbs("GET")]
-        public int AddAccount(int accountTypeId, int bankId, string name, string description, decimal startingBalance, decimal currentBalance)
+        [AcceptVerbs("POST")]
+        public int AddAccount(int accountTypeId, int bankId, string name, string description, decimal startingBalance)
         {
-            return db.AddAccount(accountTypeId, bankId, name, description, startingBalance, currentBalance);
+            return db.AddAccount(accountTypeId, bankId, name, description, startingBalance);
         }
 
         /// <summary>
@@ -316,7 +314,7 @@ namespace FinanceAPI.Controllers
         /// <param name="transactionTypeId">Type of Transaction</param>
         /// <returns>Integer indicating if Insert was successful</returns>
         [Route("AddTransaction")]
-        [AcceptVerbs("GET")]
+        [AcceptVerbs("POST")]
         public int AddTransaction(int accountId, decimal ammount, string title, string memo, bool reconciled, decimal reconciledAmt, int transactionTypeId)
         {
             return db.AddTransaction(accountId, ammount, title, memo, reconciled, reconciledAmt, transactionTypeId);

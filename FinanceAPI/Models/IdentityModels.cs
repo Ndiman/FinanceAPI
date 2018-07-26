@@ -100,25 +100,23 @@ namespace FinanceAPI.Models
         }
 
         //Inserting data into Db
-        public int AddBudget(int householdId, string budgetName, string budgetDescription, decimal spendingTarget, decimal currentBalance)
+        public int AddBudget(int householdId, string budgetName, string budgetDescription, decimal spendingTarget)
         {
-            return Database.ExecuteSqlCommand("AddBudget @householdId, @budgetName, @budgetDescription, @spendingTarget, @currentBalance",
+            return Database.ExecuteSqlCommand("AddBudget @householdId, @budgetName, @budgetDescription, @spendingTarget",
                 new SqlParameter("householdId", householdId),
                 new SqlParameter("budgetName", budgetName),
                 new SqlParameter("budgetDescription", budgetDescription),
-                new SqlParameter("spendingTarget", spendingTarget),
-                new SqlParameter("currentBalance", currentBalance));
+                new SqlParameter("spendingTarget", spendingTarget));
         }
 
-        public int AddAccount(int accountTypeId, int bankId, string name, string description, decimal startingBalance, decimal currentBalance)
+        public int AddAccount(int accountTypeId, int bankId, string name, string description, decimal startingBalance)
         {
-            return Database.ExecuteSqlCommand("AddAccount @accountTypeId, @bankId, @name, @description, @startingBalance, @currentBalance",
+            return Database.ExecuteSqlCommand("AddAccount @accountTypeId, @bankId, @name, @description, @startingBalance",
                 new SqlParameter("accountTypeId", accountTypeId),
                 new SqlParameter("bankId", bankId),
                 new SqlParameter("name", name),
                 new SqlParameter("description", description),
-                new SqlParameter("startingBalance", startingBalance),
-                new SqlParameter("currentBalance", currentBalance));
+                new SqlParameter("startingBalance", startingBalance));
         }
 
         public int AddTransaction(int accountId, decimal ammount, string title, string memo, bool reconciled, decimal reconciledAmt, int transactionTypeId)
