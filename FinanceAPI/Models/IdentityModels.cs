@@ -32,13 +32,14 @@ namespace FinanceAPI.Models
             return new ApplicationDbContext();
         }
 
-        //Selecting data from Db
+        //Households
         public async Task<Household> GetHousehold(int houseId)
         {
             return await Database.SqlQuery<Household>("GetHouseholdData @houseId",
                 new SqlParameter("houseId", houseId)).FirstOrDefaultAsync();
         }
 
+        //Accounts
         public async Task<Account> GetAccountDetails(int accountId)
         {
             return await Database.SqlQuery<Account>("GetAccountDetails @accountId",
@@ -63,6 +64,7 @@ namespace FinanceAPI.Models
                 new SqlParameter("houseId", houseId)).ToListAsync();
         }
 
+        //Budgets
         public async Task<List<Budget>> GetBudgets(int houseId)
         {
             return await Database.SqlQuery<Budget>("GetBudgets @houseId",
@@ -87,6 +89,7 @@ namespace FinanceAPI.Models
                 new SqlParameter("budgetId", budgetId)).ToListAsync();
         }
 
+        //Transactions
         public async Task<List<Transaction>> GetTransactions(int accountId)
         {
             return await Database.SqlQuery<Transaction>("GetTransactions @accountId",
@@ -119,16 +122,17 @@ namespace FinanceAPI.Models
                 new SqlParameter("startingBalance", startingBalance));
         }
 
-        public int AddTransaction(int accountId, decimal ammount, string title, string memo, bool reconciled, decimal reconciledAmt, int transactionTypeId)
+        public int AddTransaction(int accountId, decimal ammount, string title, string memo, bool reconciled, decimal reconciledAmt, int transactionTypeId, int budgetId)
         {
-            return Database.ExecuteSqlCommand("AddTransaction @accountId, @ammount, @title, @memo, @reconciled, @reconciledAmt, @transactionTypeId",
+            return Database.ExecuteSqlCommand("AddTransaction @accountId, @ammount, @title, @memo, @reconciled, @reconciledAmt, @transactionTypeId, @budgetId",
                 new SqlParameter("accountId", accountId),
                 new SqlParameter("ammount", ammount),
                 new SqlParameter("title", title),
                 new SqlParameter("memo", memo),
                 new SqlParameter("reconciled", reconciled),
                 new SqlParameter("reconciledAmt", reconciledAmt),
-                new SqlParameter("transactionTypeId", transactionTypeId));
+                new SqlParameter("transactionTypeId", transactionTypeId),
+                new SqlParameter("budgetId", budgetId));
         }
     }
 }

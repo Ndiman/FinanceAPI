@@ -16,5 +16,6 @@ namespace FinanceAPI.Models
         public bool Reconciled { get; set; }
         public decimal ReconciledAmount { get; set; }
         public int TransactionTypeId { get; set; }
+        public int? BudgetId { get; set; }
     }
 }
